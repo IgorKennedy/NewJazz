@@ -3,9 +3,9 @@ import { useEffect, useState } from 'react'
 import { supabase } from '@/lib/supabase'
 
 const OPTS: Record<string, { l: string; i: string[]; h: string }> = {
-  'Cerimônia': { l: '2. Só a cerimônia ou com recepção?', i: ['Só a cerimônia', 'Cerimônia + recepção'], h: 'A banda acompanha a cerimônia pelo tempo que ela durar. Quer um instrumento adicional, como teclado? Consulte a disponibilidade nas observações.' },
-  'Pocket': { l: '2. Quanto tempo de apresentação?', i: ['1 hora', '2 horas', '3 horas'], h: '' },
-  'Corporativo': { l: '2. Quanto tempo de apresentação?', i: ['1 hora', '2 horas', '3 horas'], h: '' },
+  'Cerimônia': { l: 'Só a cerimônia ou com recepção?', i: ['Só a cerimônia', 'Cerimônia + recepção'], h: 'A banda acompanha a cerimônia pelo tempo que ela durar. Quer um instrumento adicional, como teclado? Consulte a disponibilidade nas observações.' },
+  'Pocket': { l: 'Quanto tempo de apresentação?', i: ['1 hora', '2 horas', '3 horas'], h: '' },
+  'Corporativo': { l: 'Quanto tempo de apresentação?', i: ['1 hora', '2 horas', '3 horas'], h: '' },
 }
 
 export default function LeadForm({ whatsapp }: { whatsapp: string }) {
@@ -43,7 +43,7 @@ export default function LeadForm({ whatsapp }: { whatsapp: string }) {
         <p className="sub rv">Menos de um minuto. Ao enviar, o WhatsApp abre com a sua mensagem pronta.</p>
         <div className="fb rv">
           <fieldset>
-            <legend>1. Qual é o formato?</legend>
+            <legend>Qual é o formato?</legend>
             <div className="chips">
               {Object.keys(OPTS).map((k) => (
                 <span key={k}><input type="radio" name="fmt" id={'f' + k} checked={fmt === k} onChange={() => { setFmt(k); setOpt('') }} /><label htmlFor={'f' + k}>{k}</label></span>
@@ -62,7 +62,7 @@ export default function LeadForm({ whatsapp }: { whatsapp: string }) {
             </fieldset>
           )}
           <fieldset>
-            <legend>3. Seus dados</legend>
+            <legend>Seus dados</legend>
             <div className="g2 f">
               <div><label className="t" htmlFor="nome">Nome</label><input id="nome" autoComplete="name" value={f.name} onChange={set('name')} /></div>
               <div><label className="t" htmlFor="zap">WhatsApp com DDD</label><input id="zap" type="tel" inputMode="tel" autoComplete="tel" placeholder="(11) 90000-0000" value={f.zap} onChange={set('zap')} /></div>

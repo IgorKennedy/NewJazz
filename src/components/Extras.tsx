@@ -27,6 +27,8 @@ export default function Extras({ whatsapp, pixel, ga }: { whatsapp: string; pixe
     document.querySelectorAll('.rv').forEach((el) => io.observe(el))
     const click = (e: MouseEvent) => {
       const a = (e.target as HTMLElement).closest('[data-fmt]')
+      const mn = document.getElementById('mn') as HTMLInputElement | null
+      if (mn && (e.target as HTMLElement).closest('.nav nav a')) mn.checked = false
       if (a) window.dispatchEvent(new CustomEvent('nj-fmt', { detail: a.getAttribute('data-fmt') }))
     }
     document.addEventListener('click', click)
@@ -42,7 +44,7 @@ export default function Extras({ whatsapp, pixel, ga }: { whatsapp: string; pixe
   return (
     <>
       <a className="fab" href={`https://api.whatsapp.com/send/?phone=${whatsapp}&text=${encodeURIComponent('Olá, gostaria de um orçamento da New Jazz!')}`} target="_blank" rel="noopener">
-        <svg className="ic"><use href="#msg" /></svg>Orçamento rápido
+        <svg className="ic"><use href="#msg" /></svg><span className="fabt">Orçamento rápido</span>
       </a>
       <div id="ck" role="dialog" aria-label="Cookies" style={{ display: ck ? 'block' : 'none' }}>
         Usamos cookies para medir o uso do site e mostrar anúncios relevantes. Você pode aceitar ou recusar.

@@ -18,11 +18,13 @@ export const metadata: Metadata = {
 }
 export const viewport: Viewport = { width: 'device-width', initialScale: 1, viewportFit: 'cover', themeColor: '#000000' }
 
+const stack = `-apple-system,BlinkMacSystemFont,"SF Pro Display","SF Pro Text",${inter.style.fontFamily},system-ui,sans-serif`
+
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="pt-BR" suppressHydrationWarning>
-      <head><script dangerouslySetInnerHTML={{ __html: 'document.documentElement.className="js"' }} /></head>
-      <body className={inter.variable}>{children}</body>
+      <head><script dangerouslySetInnerHTML={{ __html: 'document.documentElement.classList.add("js")' }} /></head>
+      <body className={inter.variable} style={{ ['--f' as any]: stack }}>{children}</body>
     </html>
   )
 }
