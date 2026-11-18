@@ -1,6 +1,7 @@
 import type { Metadata, Viewport } from 'next'
 import { Inter } from 'next/font/google'
 import './globals.css'
+import MetaPixel from '@/components/MetaPixel'
 
 const inter = Inter({ subsets: ['latin'], variable: '--font-inter', display: 'swap' })
 const SITE = process.env.NEXT_PUBLIC_SITE_URL || 'https://www.newjazzoficial.com.br'
@@ -18,13 +19,14 @@ export const metadata: Metadata = {
 }
 export const viewport: Viewport = { width: 'device-width', initialScale: 1, viewportFit: 'cover', themeColor: '#000000' }
 
-const stack = `-apple-system,BlinkMacSystemFont,"SF Pro Display","SF Pro Text",${inter.style.fontFamily},system-ui,sans-serif`
-
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="pt-BR" suppressHydrationWarning>
-      <head><script dangerouslySetInnerHTML={{ __html: 'document.documentElement.classList.add("js")' }} /></head>
-      <body className={inter.variable} style={{ ['--f' as any]: stack }}>{children}</body>
+      <head><script dangerouslySetInnerHTML={{ __html: 'document.documentElement.className="js"' }} /></head>
+      <body className={inter.variable}>
+        <MetaPixel />
+        {children}
+      </body>
     </html>
   )
 }
