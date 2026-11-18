@@ -20,6 +20,33 @@ export default function MetaPixel() {
             'https://connect.facebook.net/en_US/fbevents.js');
             fbq('init', '${PIXEL_ID}');
             fbq('track', 'PageView');
+
+            // Cliques em links (WhatsApp e Instagram)
+            document.addEventListener('click', function (e) {
+              var a = e.target && e.target.closest ? e.target.closest('a') : null;
+              if (!a || !a.href) return;
+              var href = a.href.toLowerCase();
+              if (href.indexOf('wa.me') > -1 || href.indexOf('whatsapp.com') > -1) {
+                fbq('track', 'Contact', { content_name: 'WhatsApp' });
+              } else if (href.indexOf('instagram.com') > -1) {
+                fbq('trackCustom', 'ClickInstagram');
+              }
+            });
+
+            // Seções vistas (uma vez por seção)
+            if ('IntersectionObserver' in window) {
+              var seen = {};
+              var io = new IntersectionObserver(function (entries) {
+                entries.forEach(function (en) {
+                  var id = en.target.id;
+                  if (en.isIntersecting && !seen[id]) {
+                    seen[id] = true;
+                    fbq('trackCustom', 'ViewSection', { section: id });
+                  }
+                });
+              }, { threshold: 0.4 });
+              document.querySelectorAll('section[id]').forEach(function (s) { io.observe(s); });
+            }
           `,
         }}
       />
